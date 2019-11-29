@@ -71,35 +71,25 @@
                                     <Image url="@../../Resourses/JustLogo.png" />
                                  </image>
                               </ImageView>
-                              <GridPane layoutX="14.0" layoutY="8.0" prefHeight="90.0" prefWidth="399.0" style="-fx-border-color: black;">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Label alignment="CENTER" prefHeight="21.0" prefWidth="213.0" text="Name" textFill="#13a6ff">
-                                       <font>
-                                          <Font name="System Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER" prefHeight="21.0" prefWidth="213.0" text="Email" textFill="#13a6ff" GridPane.columnIndex="1">
-                                       <font>
-                                          <Font name="System Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label alignment="CENTER" prefHeight="21.0" prefWidth="213.0" text="Gender" textFill="#13a6ff" GridPane.columnIndex="2">
-                                       <font>
-                                          <Font name="System Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </GridPane>
+                              <TextField fx:id="txtFirstName1" layoutX="527.0" layoutY="14.0" prefHeight="31.0" prefWidth="274.0" />
+                              <Label alignment="BOTTOM_LEFT" layoutX="433.0" layoutY="19.0" prefHeight="21.0" prefWidth="94.0" text="First name:" textFill="#13a6ff" />
+                              <Label alignment="BOTTOM_LEFT" layoutX="433.0" layoutY="58.0" prefHeight="21.0" prefWidth="94.0" text="Last name:" textFill="#13a6ff" />
+                              <TextField fx:id="txtFirstName11" layoutX="527.0" layoutY="53.0" prefHeight="31.0" prefWidth="274.0" />
+                              <TextField fx:id="txtFirstName111" layoutX="527.0" layoutY="130.0" prefHeight="31.0" prefWidth="274.0" />
+                              <Label alignment="BOTTOM_LEFT" layoutX="433.0" layoutY="135.0" prefHeight="21.0" prefWidth="94.0" text="Email" textFill="#13a6ff" />
+                              <Label alignment="BOTTOM_LEFT" layoutX="433.0" layoutY="96.0" prefHeight="21.0" prefWidth="94.0" text="Phone:" textFill="#13a6ff" />
+                              <TextField fx:id="txtFirstName12" layoutX="527.0" layoutY="91.0" prefHeight="31.0" prefWidth="274.0" />
+                              <Label alignment="BOTTOM_LEFT" layoutX="433.0" layoutY="214.0" prefHeight="21.0" prefWidth="94.0" text="Gender" textFill="#13a6ff" />
+                              <Label alignment="BOTTOM_LEFT" layoutX="433.0" layoutY="175.0" prefHeight="21.0" prefWidth="94.0" text="Birth date" textFill="#13a6ff" />
+                              <TextField fx:id="txtFirstName13" layoutX="527.0" layoutY="170.0" prefHeight="31.0" prefWidth="274.0" />
+                              <Button fx:id="btnCancel1" defaultButton="true" layoutX="697.0" layoutY="256.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="106.0" text="Cancel" textAlignment="CENTER" textFill="#13a6ff" underline="true" />
+                              <Button fx:id="btnSave2" defaultButton="true" layoutX="579.0" layoutY="256.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="106.0" text="Save" textAlignment="CENTER" textFill="#13a6ff" />
+                              <TableView fx:id="tblMember" layoutX="8.0" layoutY="7.0" prefHeight="316.0" prefWidth="416.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                              <ComboBox layoutX="527.0" layoutY="209.0" prefHeight="31.0" prefWidth="274.0" />
                            </children></AnchorPane>
                   </content>
                 </Tab>

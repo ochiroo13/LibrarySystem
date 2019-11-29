@@ -26,6 +26,7 @@ public class Database {
 		initAdmins();
 		initLibrarians();
 		initUsers();
+		initMembers();
 	}
 
 	private void initAdmins() {
@@ -118,5 +119,31 @@ public class Database {
 
 		listUser.addAll(listAdmin);
 		listUser.addAll(listLibrarian);
+	}
+
+	private void initMembers() {
+		listMember = new ArrayList<Member>();
+
+		Member member1 = new Member();
+		member1.setId(1);
+		member1.setEmail("tony@mum.edu");
+		member1.setPhone("99887788");
+		member1.setFirstName("John");
+		member1.setLastName("Snow");
+		member1.setBirthDate(new Date());
+		member1.setGender(Const.MALE);
+		member1.setCheckedOutBooks(null);
+		listMember.add(member1);
+
+		Member member2 = new Member();
+		member2.setId(2);
+		member2.setEmail("danny@mum.edu");
+		member2.setPhone("77887788");
+		member2.setFirstName("Danny");
+		member2.setLastName("Targaryen");
+		member2.setBirthDate(new Date());
+		member2.setGender(Const.FEMALE);
+		member2.setCheckedOutBooks(null);
+		listMember.add(member2);
 	}
 }

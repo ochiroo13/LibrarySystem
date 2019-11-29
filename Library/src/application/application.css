@@ -24,3 +24,12 @@
     -fx-alignment: CENTER;
     -fx-text-fill: #13A6FF;
 }
+
+
+
+/* Table view */
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {
+    -fx-background-color: #13A6FF;
+}
