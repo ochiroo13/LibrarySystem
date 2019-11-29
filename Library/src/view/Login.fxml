@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LoginController">
+	<children>
+		<AnchorPane layoutX="-7.0" layoutY="-6.0" prefHeight="530.0" prefWidth="836.0" style="-fx-background-color: #2D3447;">
+			<children>
+				<ImageView fitHeight="594.0" fitWidth="886.0" pickOnBounds="true" preserveRatio="true">
+					<image>
+						<Image url="@../../Resourses/old-library-book.jpg" />
+					</image>
+				</ImageView>
+				<AnchorPane layoutX="232.0" layoutY="40.0" prefHeight="512.0" prefWidth="423.0" style="-fx-background-color: #BFF6F9; -fx-padding: 10; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0);">
+					<children>
+						<ImageView fitHeight="150.0" fitWidth="200.0" layoutX="112.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../../Resourses/JustLogo.png" />
+							</image>
+						</ImageView>
+						<TextField fx:id="txtUserName" layoutX="91.0" layoutY="209.0" prefHeight="31.0" prefWidth="242.0" promptText="Username" />
+						<PasswordField fx:id="pwdPassword" layoutX="91.0" layoutY="256.0" prefHeight="31.0" prefWidth="242.0" promptText="Password" />
+						<CheckBox fx:id="chkRememberMe" layoutX="91.0" layoutY="312.0" mnemonicParsing="false" text="Remember me" textFill="#13a6ff" />
+            						<Button fx:id="btnLogin" defaultButton="true" layoutX="227.0" layoutY="307.0" mnemonicParsing="false" onAction="#login" prefHeight="31.0" prefWidth="106.0" text="Login" textAlignment="CENTER" textFill="#13a6ff" underline="true" />
+					</children>
+				</AnchorPane>
+			</children>
+		</AnchorPane>
+	</children>
+</AnchorPane>
