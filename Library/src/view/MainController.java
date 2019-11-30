@@ -7,6 +7,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -46,6 +49,23 @@ public class MainController implements Initializable {
 	@FXML
 	private TableView<Member> tblMember;
 
+	private TextField txtFirstNameMember;
+
+	private TextField txtLastNameMember;
+
+	private TextField txtPhoneMember;
+
+	private TextField txtEmailMember;
+
+	private DatePicker datBirthDateMember;
+
+	private ComboBox cboGenderMember;
+
+	private Button btnAddMember;
+
+	private Button btnSaveMember;
+
+	private Button btnCancelMember;
 	// ************************** Member tab **************************//
 
 	@Override
@@ -100,6 +120,10 @@ public class MainController implements Initializable {
 //		for (Member member : Database.listMember) {
 //			tblMember.getItems().add(member);
 //		}
+	}
+
+	private void selectFistRowMember() {
+//		if (tblMember.getRowFactory().call(param)))
 	}
 
 }
