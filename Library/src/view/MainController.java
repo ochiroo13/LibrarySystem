@@ -1,10 +1,12 @@
 package view;
 
 import java.net.URL;
+import java.time.ZoneId;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -49,23 +51,35 @@ public class MainController implements Initializable {
 	@FXML
 	private TableView<Member> tblMember;
 
+	@FXML
 	private TextField txtFirstNameMember;
 
+	@FXML
 	private TextField txtLastNameMember;
 
+	@FXML
 	private TextField txtPhoneMember;
 
+	@FXML
 	private TextField txtEmailMember;
 
+	@FXML
 	private DatePicker datBirthDateMember;
 
-	private ComboBox cboGenderMember;
+	@FXML
+	private ComboBox<String> cboGenderMember;
 
+	@FXML
 	private Button btnAddMember;
 
+	@FXML
 	private Button btnSaveMember;
 
+	@FXML
 	private Button btnCancelMember;
+
+	private String memberTabState = Const.NORMAL;
+
 	// ************************** Member tab **************************//
 
 	@Override
@@ -99,6 +113,13 @@ public class MainController implements Initializable {
 
 		//////////////////////////////////////////////////////////////
 
+		// Gender combo
+		cboGenderMember.getItems().addAll(Const.MALE, Const.FEMALE);
+
+		TableColumn<Member, String> memberId = new TableColumn<Member, String>("Id");
+		memberId.setCellValueFactory(new PropertyValueFactory<Member, String>("Id"));
+		memberId.setVisible(true);
+
 		TableColumn<Member, String> firstNameCol = new TableColumn<Member, String>("Name");
 		firstNameCol.setCellValueFactory(new PropertyValueFactory<Member, String>("firstName"));
 
@@ -115,15 +136,77 @@ public class MainController implements Initializable {
 
 		tblMember.setItems(data);
 
-		tblMember.getColumns().addAll(firstNameCol, emailCol, genderCol, phoneCol);
+		tblMember.getColumns().addAll(memberId, firstNameCol, emailCol, genderCol, phoneCol);
 
-//		for (Member member : Database.listMember) {
-//			tblMember.getItems().add(member);
-//		}
+		gridMemberRowChangedEvent();
+
+		tblMember.getSelectionModel().selectFirst();
+
+		txtFirstNameMember.textProperty().addListener((observable, oldValue, newValue) -> {
+			System.out.println("textfield changed from " + oldValue + " to " + newValue);
+		});
 	}
 
-	private void selectFistRowMember() {
-//		if (tblMember.getRowFactory().call(param)))
+	private void gridMemberRowChangedEvent() {
+		tblMember.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+			if (newSelection != null) {
+				txtFirstNameMember.setText(newSelection.getFirstName());
+				txtLastNameMember.setText(newSelection.getLastName());
+				txtPhoneMember.setText(newSelection.getPhone());
+				txtEmailMember.setText(newSelection.getEmail());
+				datBirthDateMember
+						.setValue(newSelection.getBirthDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+				cboGenderMember.setValue(newSelection.getGender());
+			}
+		});
+	}
+
+	public void clickAddMember(ActionEvent event) {
+		memberTabState = Const.ADD;
+		toggleMember();
+		System.out.println("clickAddMember");
+	}
+
+	public void clickSaveMember(ActionEvent event) {
+		memberTabState = Const.NORMAL;
+
+		toggleMember();
+		System.out.println("clickSaveMember");
+
+	}
+
+	public void clickCancelMember(ActionEvent event) {
+		memberTabState = Const.NORMAL;
+
+		toggleMember();
+		System.out.println("clickCancelMember");
+
+	}
+
+	public void textChangedMember(ActionEvent event) {
+
+		System.out.println("textChangedMember");
+	}
+
+	private void toggleMember() {
+
+		switch (memberTabState) {
+		case Const.NORMAL:
+			System.out.println("NORMAL");
+
+			break;
+		case Const.ADD:
+			System.out.println("ADD");
+
+			break;
+		case Const.EDIT:
+			System.out.println("EDIT");
+
+			break;
+
+		default:
+			break;
+		}
 	}
 
 }
