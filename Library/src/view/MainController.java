@@ -45,6 +45,17 @@ public class MainController implements Initializable {
 
 	@FXML
 	private Label lblWelcome;
+	
+	@FXML
+	private TableView COtable;
+	
+	@FXML
+	private ComboBox COmember;
+	
+	@FXML
+	private ComboBOx CObook;
+	
+	
 	// ************************** Profile tab **************************//
 
 	// ************************** Member tab **************************//
