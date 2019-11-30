@@ -22,6 +22,14 @@ public class Database {
 
 	public static List<Member> listMember;
 
+	public static int maxIdAdmin;
+
+	public static int maxIdLibrarian;
+
+	public static int maxIdMember;
+
+	public static int maxIdBook;
+
 	public void initData() {
 		initAdmins();
 		initLibrarians();
@@ -53,6 +61,8 @@ public class Database {
 		admin2.setSsn(2);
 		admin2.setGender(Const.FEMALE);
 		listAdmin.add(admin2);
+
+		maxIdAdmin = listAdmin.size();
 	}
 
 	private void initLibrarians() {
@@ -112,6 +122,8 @@ public class Database {
 		librarian5.setSsn(1);
 		librarian5.setGender(Const.MALE);
 		listLibrarian.add(librarian5);
+
+		maxIdLibrarian = listLibrarian.size();
 	}
 
 	private void initUsers() {
@@ -145,5 +157,7 @@ public class Database {
 		member2.setGender(Const.FEMALE);
 		member2.setCheckedOutBooks(null);
 		listMember.add(member2);
+
+		maxIdMember = listMember.size();
 	}
 }

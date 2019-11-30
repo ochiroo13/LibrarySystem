@@ -2,6 +2,7 @@ package view;
 
 import java.net.URL;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -45,17 +46,16 @@ public class MainController implements Initializable {
 
 	@FXML
 	private Label lblWelcome;
-	
+
 	@FXML
 	private TableView COtable;
-	
+
 	@FXML
 	private ComboBox COmember;
-	
+
 	@FXML
-	private ComboBOx CObook;
-	
-	
+	private ComboBox CObook;
+
 	// ************************** Profile tab **************************//
 
 	// ************************** Member tab **************************//
@@ -122,8 +122,7 @@ public class MainController implements Initializable {
 		lblWelcome.setText(String.format("Welcome %s. %s %s!", title, ConnectedUser.connUser.getFirstName(),
 				ConnectedUser.connUser.getLastName()));
 
-		//////////////////////////////////////////////////////////////
-
+		// ************************** Member tab **************************//
 		// Gender combo
 		cboGenderMember.getItems().addAll(Const.MALE, Const.FEMALE);
 
@@ -156,6 +155,8 @@ public class MainController implements Initializable {
 		txtFirstNameMember.textProperty().addListener((observable, oldValue, newValue) -> {
 			System.out.println("textfield changed from " + oldValue + " to " + newValue);
 		});
+
+		// ************************** Member tab **************************//
 	}
 
 	private void gridMemberRowChangedEvent() {
@@ -183,6 +184,22 @@ public class MainController implements Initializable {
 
 		toggleMember();
 		System.out.println("clickSaveMember");
+
+		Member newMember = new Member();
+		newMember.setId(Database.maxIdMember);
+		Database.maxIdMember++;
+		newMember.setEmail("tony@mum.edu");
+		newMember.setPhone("99887788");
+		newMember.setFirstName("Johny");
+		newMember.setLastName("Snow");
+		newMember.setBirthDate(new Date());
+		newMember.setGender(Const.MALE);
+		newMember.setCheckedOutBooks(null);
+		Database.listMember.add(newMember);
+
+		ObservableList<Member> data = FXCollections.observableArrayList(Database.listMember);
+
+		tblMember.setItems(data);
 
 	}
 
