@@ -28,6 +28,8 @@ public class Librarian extends User {
 
 	private boolean librarianAccess;
 
+	private String pictureUrl;
+
 	public Librarian() {
 		setAdminAccess(false);
 		setLibrarianAccess(true);
@@ -127,6 +129,14 @@ public class Librarian extends User {
 
 	public void setLibrarianAccess(boolean librarianAccess) {
 		this.librarianAccess = librarianAccess;
+	}
+
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
+
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
 	}
 
 }

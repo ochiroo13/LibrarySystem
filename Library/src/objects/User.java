@@ -24,6 +24,8 @@ public abstract class User {
 
 	private boolean librarianAccess;
 
+	private String pictureUrl;
+
 	public int getSsn() {
 		return ssn;
 	}
@@ -102,6 +104,14 @@ public abstract class User {
 
 	public void setLibrarianAccess(boolean librarianAccess) {
 		this.librarianAccess = librarianAccess;
+	}
+
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
+
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
 	}
 
 }

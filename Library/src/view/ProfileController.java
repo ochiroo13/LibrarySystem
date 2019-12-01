@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import utils.ConnectedUser;
 
 public class ProfileController implements Initializable {
@@ -28,6 +30,9 @@ public class ProfileController implements Initializable {
 
 	@FXML
 	private Label lblLastLoginDate;
+
+	@FXML
+	private ImageView imgProfile;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -53,6 +58,13 @@ public class ProfileController implements Initializable {
 		txtLoginName.setText(ConnectedUser.connUser.getLoginName());
 		txtPassword.setText(ConnectedUser.connUser.getPassword());
 		lblLastLoginDate.setText(ConnectedUser.connUser.getLastLoginDate().toString());
+
+		String picUrl = ConnectedUser.connUser.getPictureUrl();
+		if (picUrl == null || picUrl.isEmpty()) {
+			picUrl = "Default.jpg";
+		}
+		Image image = new Image(getClass().getResource(picUrl).toURI().toString());
+		imgProfile.setImage(image);
 
 	}
 }
