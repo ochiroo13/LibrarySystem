@@ -1,8 +1,11 @@
 package objects;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public abstract class User {
+public abstract class User implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	private int ssn;
 

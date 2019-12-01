@@ -1,6 +1,8 @@
 package view;
 
+import java.io.IOException;
 import java.net.URL;
+import objects.Book;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -50,6 +52,18 @@ public class MainController implements Initializable {
 	/**
 	 * fillForm
 	 */
+	
+	{
+		
+		try {
+			Book.control("books.txt");
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
 	public void fillForm() {
 
 		if (ConnectedUser.connUser.equals(null)) {

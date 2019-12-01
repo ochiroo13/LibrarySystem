@@ -1,10 +1,13 @@
 package utils;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import objects.User;
 
-public class ConnectedUser extends User {
+public class ConnectedUser extends User implements Serializable {
+   private static final long serialVersionUID = 1L;
+
 
 	public static User connUser = null;
 
