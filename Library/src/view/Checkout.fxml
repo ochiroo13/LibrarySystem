@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="view.CheckoutController">
+	<children>
+		<TableView fx:id="COtable" layoutX="27.0" layoutY="28.0"
+			prefHeight="283.0" prefWidth="671.0">
+			<columns>
+				<TableColumn prefWidth="75.0" text="C1" />
+				<TableColumn prefWidth="75.0" text="C2" />
+			</columns>
+		</TableView>
+		<ComboBox fx:id="COMember" layoutX="134.0" layoutY="337.0"
+			prefWidth="150.0" />
+		<ComboBox fx:id="COBook" layoutX="134.0" layoutY="377.0"
+			prefWidth="150.0" />
+		<Label layoutX="69.0" layoutY="341.0" prefHeight="17.0"
+			prefWidth="50.0" text="Member" />
+		<Label layoutX="80.0" layoutY="381.0" text="Book" />
+		<Button fx:id="CObutton" layoutX="370.0" layoutY="377.0"
+			mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0"
+			text="Checkout Book" />
+	</children>
+</AnchorPane>
