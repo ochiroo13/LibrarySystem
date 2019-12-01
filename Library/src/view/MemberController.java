@@ -10,14 +10,20 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 import objects.Member;
+import utils.ConnectedUser;
 import utils.Const;
 import utils.Database;
 
@@ -54,6 +60,10 @@ public class MemberController implements Initializable {
 	private Button btnCancelMember;
 
 	private String memberTabState = Const.NORMAL;
+
+	private Alert alert = new Alert(AlertType.NONE, "", ButtonType.CLOSE);
+
+	private int currentMemberId = 0;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -94,6 +104,8 @@ public class MemberController implements Initializable {
 
 		tblMember.getColumns().addAll(memberId, firstNameCol, emailCol, genderCol, phoneCol);
 
+		addButtonToTable();
+
 		gridMemberRowChangedEvent();
 
 		tblMember.getSelectionModel().selectFirst();
@@ -107,6 +119,7 @@ public class MemberController implements Initializable {
 	private void gridMemberRowChangedEvent() {
 		tblMember.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 			if (newSelection != null) {
+				currentMemberId = newSelection.getId();
 				txtFirstNameMember.setText(newSelection.getFirstName());
 				txtLastNameMember.setText(newSelection.getLastName());
 				txtPhoneMember.setText(newSelection.getPhone());
@@ -125,32 +138,57 @@ public class MemberController implements Initializable {
 	}
 
 	public void clickSaveMember(ActionEvent event) {
-		memberTabState = Const.NORMAL;
 
 		toggleMember();
 		System.out.println("clickSaveMember");
 
-		Member newMember = new Member();
-		newMember.setId(Database.maxIdMember);
-		Database.maxIdMember++;
-		newMember.setEmail("tony@mum.edu");
-		newMember.setPhone("99887788");
-		newMember.setFirstName("Johny");
-		newMember.setLastName("Snow");
-		newMember.setBirthDate(new Date());
-		newMember.setGender(Const.MALE);
-		newMember.setCheckedOutBooks(null);
-		Database.listMember.add(newMember);
+		if (!ConnectedUser.connUser.isAdminAccess()) {
+			alert.setAlertType(AlertType.INFORMATION);
+			alert.setContentText("You don't have Administrator access!");
+			alert.show();
+			return;
+		}
+
+		if (memberTabState.equals(Const.ADD)) {
+			Member newMember = new Member();
+			Database.maxIdMember++;
+			newMember.setId(Database.maxIdMember);
+			newMember.setEmail(txtEmailMember.getText());
+			newMember.setPhone(txtPhoneMember.getText());
+			newMember.setFirstName(txtFirstNameMember.getText());
+			newMember.setLastName(txtLastNameMember.getText());
+			newMember.setBirthDate(
+					Date.from(datBirthDateMember.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+			newMember.setGender(cboGenderMember.getValue());
+			newMember.setCheckedOutBooks(null);
+			Database.listMember.add(newMember);
+		} else {
+			for (Member m : Database.listMember) {
+				if (m.getId() == currentMemberId) {
+					m.setEmail(txtEmailMember.getText());
+					m.setPhone(txtPhoneMember.getText());
+					m.setFirstName(txtFirstNameMember.getText());
+					m.setLastName(txtLastNameMember.getText());
+					m.setBirthDate(
+							Date.from(datBirthDateMember.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+					m.setGender(cboGenderMember.getValue());
+				}
+			}
+		}
 
 		ObservableList<Member> data = FXCollections.observableArrayList(Database.listMember);
 
 		tblMember.setItems(data);
+		tblMember.refresh();
+
+		memberTabState = Const.NORMAL;
 
 	}
 
 	public void clickCancelMember(ActionEvent event) {
 		memberTabState = Const.NORMAL;
 
+		tblMember.getSelectionModel().selectFirst();
 		toggleMember();
 		System.out.println("clickCancelMember");
 
@@ -170,7 +208,7 @@ public class MemberController implements Initializable {
 			break;
 		case Const.ADD:
 			System.out.println("ADD");
-
+			clearForm();
 			break;
 		case Const.EDIT:
 			System.out.println("EDIT");
@@ -182,4 +220,76 @@ public class MemberController implements Initializable {
 		}
 	}
 
+	private void removeMember(int memberId) {
+
+		if (!ConnectedUser.connUser.isAdminAccess()) {
+			alert.setAlertType(AlertType.INFORMATION);
+			alert.setContentText("You don't have Administrator access!");
+			alert.show();
+			return;
+		}
+
+		for (Member m : Database.listMember) {
+			if (m.getId() == currentMemberId) {
+				Database.listMember.remove(m);
+				break;
+			}
+		}
+
+		ObservableList<Member> data = FXCollections.observableArrayList(Database.listMember);
+
+		tblMember.setItems(data);
+		tblMember.refresh();
+
+		memberTabState = Const.NORMAL;
+
+		tblMember.getSelectionModel().selectFirst();
+		toggleMember();
+	}
+
+	private void addButtonToTable() {
+		TableColumn<Member, Void> colBtn = new TableColumn("");
+
+		Callback<TableColumn<Member, Void>, TableCell<Member, Void>> cellFactory = new Callback<TableColumn<Member, Void>, TableCell<Member, Void>>() {
+			@Override
+			public TableCell<Member, Void> call(final TableColumn<Member, Void> param) {
+				final TableCell<Member, Void> cell = new TableCell<Member, Void>() {
+
+					private final Button btn = new Button("Delete");
+
+					{
+						btn.setOnAction((ActionEvent event) -> {
+							Member data = getTableView().getItems().get(getIndex());
+							removeMember(data.getId());
+						});
+					}
+
+					@Override
+					public void updateItem(Void item, boolean empty) {
+						super.updateItem(item, empty);
+						if (empty) {
+							setGraphic(null);
+						} else {
+							setGraphic(btn);
+						}
+					}
+				};
+				return cell;
+			}
+		};
+
+		colBtn.setCellFactory(cellFactory);
+
+		tblMember.getColumns().add(colBtn);
+
+	}
+
+	private void clearForm() {
+		txtEmailMember.setText(null);
+		txtPhoneMember.setText(null);
+		txtFirstNameMember.setText(null);
+		txtLastNameMember.setText(null);
+		datBirthDateMember.setValue(null);
+		cboGenderMember.setValue(null);
+	}
 }

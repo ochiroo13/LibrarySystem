@@ -20,6 +20,10 @@ public abstract class User {
 
 	private String gender;
 
+	private boolean adminAccess;
+
+	private boolean librarianAccess;
+
 	public int getSsn() {
 		return ssn;
 	}
@@ -82,6 +86,22 @@ public abstract class User {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public boolean isAdminAccess() {
+		return adminAccess;
+	}
+
+	public void setAdminAccess(boolean adminAccess) {
+		this.adminAccess = adminAccess;
+	}
+
+	public boolean isLibrarianAccess() {
+		return librarianAccess;
+	}
+
+	public void setLibrarianAccess(boolean librarianAccess) {
+		this.librarianAccess = librarianAccess;
 	}
 
 }

@@ -22,6 +22,10 @@ public class ConnectedUser extends User {
 
 	private Date lastLoginDate;
 
+	private boolean adminAccess;
+
+	private boolean librarianAccess;
+
 	public int getSsn() {
 		return ssn;
 	}
@@ -76,6 +80,22 @@ public class ConnectedUser extends User {
 
 	public void setLastLoginDate(Date lastLoginDate) {
 		this.lastLoginDate = lastLoginDate;
+	}
+
+	public boolean isAdminAccess() {
+		return adminAccess;
+	}
+
+	public void setAdminAccess(boolean adminAccess) {
+		this.adminAccess = adminAccess;
+	}
+
+	public boolean isLibrarianAccess() {
+		return librarianAccess;
+	}
+
+	public void setLibrarianAccess(boolean librarianAccess) {
+		this.librarianAccess = librarianAccess;
 	}
 
 	public boolean login(String loginName, String password) {

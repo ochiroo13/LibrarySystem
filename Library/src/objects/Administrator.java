@@ -20,6 +20,15 @@ public class Administrator extends User {
 
 	private String gender;
 
+	private boolean adminAccess;
+
+	private boolean librarianAccess;
+
+	public Administrator() {
+		setAdminAccess(true);
+		setLibrarianAccess(false);
+	}
+
 	public int getSsn() {
 		return ssn;
 	}
@@ -82,6 +91,22 @@ public class Administrator extends User {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public boolean isAdminAccess() {
+		return adminAccess;
+	}
+
+	public void setAdminAccess(boolean adminAccess) {
+		this.adminAccess = adminAccess;
+	}
+
+	public boolean isLibrarianAccess() {
+		return librarianAccess;
+	}
+
+	public void setLibrarianAccess(boolean librarianAccess) {
+		this.librarianAccess = librarianAccess;
 	}
 
 }
