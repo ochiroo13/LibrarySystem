@@ -27,8 +27,29 @@ public class Database {
 		initLibrarians();
 		initUsers();
 		initMembers();
+		initBooks();
 	}
 
+	private void initBooks() {
+	listBook= new ArrayList<Book>();
+    Book bk = new Book();
+    bk.setId(1);
+    bk.setName("title 1");
+    bk.setAuthorName("name 1");
+    listBook.add(bk);
+    bk = new Book();
+    bk.setId(2);
+    bk.setName("title 2");
+    bk.setAuthorName("name 2");
+    listBook.add(bk);
+    bk = new Book();
+    bk.setId(3);
+    bk.setName("title 3");
+    bk.setAuthorName("name 3");
+    listBook.add(bk);
+    
+	}
+	 
 	private void initAdmins() {
 		listAdmin = new ArrayList<Administrator>();
 
