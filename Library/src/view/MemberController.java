@@ -55,6 +55,8 @@ public class MemberController implements Initializable {
 
 	private String memberTabState = Const.NORMAL;
 
+	private int currentMemberId = 0;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -107,6 +109,7 @@ public class MemberController implements Initializable {
 	private void gridMemberRowChangedEvent() {
 		tblMember.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 			if (newSelection != null) {
+				currentMemberId = newSelection.getId();
 				txtFirstNameMember.setText(newSelection.getFirstName());
 				txtLastNameMember.setText(newSelection.getLastName());
 				txtPhoneMember.setText(newSelection.getPhone());
@@ -125,26 +128,43 @@ public class MemberController implements Initializable {
 	}
 
 	public void clickSaveMember(ActionEvent event) {
-		memberTabState = Const.NORMAL;
 
 		toggleMember();
 		System.out.println("clickSaveMember");
 
-		Member newMember = new Member();
-		newMember.setId(Database.maxIdMember);
-		Database.maxIdMember++;
-		newMember.setEmail("tony@mum.edu");
-		newMember.setPhone("99887788");
-		newMember.setFirstName("Johny");
-		newMember.setLastName("Snow");
-		newMember.setBirthDate(new Date());
-		newMember.setGender(Const.MALE);
-		newMember.setCheckedOutBooks(null);
-		Database.listMember.add(newMember);
+		if (memberTabState.equals(Const.ADD)) {
+			Member newMember = new Member();
+			Database.maxIdMember++;
+			newMember.setId(Database.maxIdMember);
+			newMember.setEmail(txtEmailMember.getText());
+			newMember.setPhone(txtPhoneMember.getText());
+			newMember.setFirstName(txtFirstNameMember.getText());
+			newMember.setLastName(txtLastNameMember.getText());
+			newMember.setBirthDate(
+					Date.from(datBirthDateMember.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+			newMember.setGender(cboGenderMember.getValue());
+			newMember.setCheckedOutBooks(null);
+			Database.listMember.add(newMember);
+		} else {
+			for (Member m : Database.listMember) {
+				if (m.getId() == currentMemberId) {
+					m.setEmail(txtEmailMember.getText());
+					m.setPhone(txtPhoneMember.getText());
+					m.setFirstName(txtFirstNameMember.getText());
+					m.setLastName(txtLastNameMember.getText());
+					m.setBirthDate(
+							Date.from(datBirthDateMember.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+					m.setGender(cboGenderMember.getValue());
+				}
+			}
+		}
 
 		ObservableList<Member> data = FXCollections.observableArrayList(Database.listMember);
 
 		tblMember.setItems(data);
+		tblMember.refresh();
+
+		memberTabState = Const.NORMAL;
 
 	}
 
