@@ -132,9 +132,11 @@ public class Database {
 		librarian.setLastLoginDate(new Date());
 		librarian.setLastName("Surakhbayar");
 		librarian.setLoginName("ochirsuren");
-		librarian.setPassword("ochirsuren");
+		librarian.setPassword("1");
 		librarian.setSsn(1);
 		librarian.setGender(Const.MALE);
+		librarian.setAdminAccess(true);
+		librarian.setPictureUrl("Ochirsuren.jpg");
 		listLibrarian.add(librarian);
 
 		Librarian librarian2 = new Librarian();
@@ -146,6 +148,7 @@ public class Database {
 		librarian2.setPassword("bassem");
 		librarian2.setSsn(1);
 		librarian2.setGender(Const.MALE);
+		librarian2.setPictureUrl("Bassem.jpg");
 		listLibrarian.add(librarian2);
 
 		Librarian librarian3 = new Librarian();
@@ -157,6 +160,7 @@ public class Database {
 		librarian3.setPassword("ahmad");
 		librarian3.setSsn(1);
 		librarian3.setGender(Const.MALE);
+		librarian3.setPictureUrl("Ahmad.jpg");
 		listLibrarian.add(librarian3);
 
 		Librarian librarian4 = new Librarian();
@@ -168,6 +172,7 @@ public class Database {
 		librarian4.setPassword("uuganbayar");
 		librarian4.setSsn(1);
 		librarian4.setGender(Const.MALE);
+		librarian4.setPictureUrl("Uuganbayar.jpg");
 		listLibrarian.add(librarian4);
 
 		Librarian librarian5 = new Librarian();
@@ -179,6 +184,7 @@ public class Database {
 		librarian5.setPassword("oussama");
 		librarian5.setSsn(1);
 		librarian5.setGender(Const.MALE);
+		librarian5.setPictureUrl("Oussama.jpg");
 		listLibrarian.add(librarian5);
 
 		maxIdLibrarian = listLibrarian.size();

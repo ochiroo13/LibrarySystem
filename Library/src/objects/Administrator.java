@@ -1,8 +1,11 @@
 package objects;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Administrator extends User {
+public class Administrator extends User implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	private int ssn;
 
@@ -23,6 +26,8 @@ public class Administrator extends User {
 	private boolean adminAccess;
 
 	private boolean librarianAccess;
+
+	private String pictureUrl;
 
 	public Administrator() {
 		setAdminAccess(true);
@@ -107,6 +112,14 @@ public class Administrator extends User {
 
 	public void setLibrarianAccess(boolean librarianAccess) {
 		this.librarianAccess = librarianAccess;
+	}
+
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
+
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
 	}
 
 }

@@ -3,6 +3,7 @@ package view;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -47,19 +48,17 @@ public class LoginController {
 		}
 		if (connUser.login(txtUserName.getText(), pwdPassword.getText())) {
 			System.out.println("success!");
-			Stage primaryStage = new Stage();
 
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Main.fxml"));
-
-			Parent root = (Parent) loader.load();
-
-			MainController mainContr = loader.getController();
-			mainContr.fillForm();
-
-			Scene scene = new Scene(root, 886, 594);
-			scene.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
+			
+			 Node node=(Node) event.getSource();
+       	  Stage stage=(Stage) node.getScene().getWindow();
+       	
+       	 FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
+		      Parent root = loader.load();
+		     
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
 		} else {
 			alert.setContentText("User name or password is incorrect!");
 			alert.show();
