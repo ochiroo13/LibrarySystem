@@ -53,6 +53,7 @@ public class MainController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		System.out.println(location);
+		this.fillForm();
 	}
 
 	/**
@@ -66,12 +67,14 @@ public class MainController implements Initializable {
 		} catch (ClassNotFoundException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			this.fillForm();
 		}
+	
 		
 		
 	}
-	public void fillForm() {
-
+	 public void fillForm() {
+		 System.out.println("here");
 		if (ConnectedUser.connUser.equals(null)) {
 			System.out.println("Connected user is null");
 		}

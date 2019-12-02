@@ -8,23 +8,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8"
-	xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainController">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainController">
 	<children>
-		<AnchorPane layoutX="-7.0" layoutY="-6.0"
-			prefHeight="530.0" prefWidth="836.0"
-			style="-fx-background-color: #2D3447;">
+		<AnchorPane layoutX="-7.0" layoutY="-6.0" prefHeight="530.0" prefWidth="836.0" style="-fx-background-color: #2D3447;">
 			<children>
-				<ImageView fitHeight="594.0" fitWidth="886.0"
-					pickOnBounds="true" preserveRatio="true">
+				<ImageView fitHeight="594.0" fitWidth="886.0" pickOnBounds="true" preserveRatio="true">
 					<image>
 						<Image url="@../../Resourses/old-library-book.jpg" />
 					</image>
 				</ImageView>
-				<TabPane layoutX="25.0" layoutY="69.0" prefHeight="500.0"
-					prefWidth="837.0"
-					style="-fx-background-color: BFF6F9; -fx-tab-min-height: 50; -fx-tab-min-width: 143; -fx-padding: 10; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0);"
-					tabClosingPolicy="UNAVAILABLE">
+				<TabPane layoutX="25.0" layoutY="69.0" prefHeight="500.0" prefWidth="837.0" style="-fx-background-color: BFF6F9; -fx-tab-min-height: 50; -fx-tab-min-width: 143; -fx-padding: 10; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0);" tabClosingPolicy="UNAVAILABLE">
 					<tabs>
 						<Tab text="Profile">
 							<content>
@@ -53,21 +46,13 @@
 						</Tab>
 					</tabs>
 				</TabPane>
-				<Button fx:id="btnLogout" defaultButton="true"
-					layoutX="756.0" layoutY="17.0" mnemonicParsing="false"
-					prefHeight="42.0" prefWidth="106.0"
-					style="-fx-background-color: BFF6F9; -fx-padding: 10; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0);"
-					text="Logout" onAction="#logout" textAlignment="CENTER" textFill="#13a6ff"
-					underline="true" />
-				<Label fx:id="lblWelcome" alignment="CENTER"
-					contentDisplay="RIGHT" layoutX="25.0" layoutY="17.0"
-					prefHeight="41.0" prefWidth="693.0"
-					style="-fx-background-color: BFF6F9; -fx-padding: 1; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0);"
-					text="Welcome Mr. Uuganbayar" textFill="#13a6ff">
+				<Button fx:id="btnLogout" defaultButton="true" layoutX="756.0" layoutY="17.0" mnemonicParsing="false" onAction="#logout" prefHeight="42.0" prefWidth="106.0" style="-fx-background-color: BFF6F9; -fx-padding: 10; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0);" text="Logout" textAlignment="CENTER" textFill="#13a6ff" underline="true" />
+				<Label fx:id="lblWelcome" alignment="CENTER" contentDisplay="RIGHT" layoutX="25.0" layoutY="17.0" prefHeight="41.0" prefWidth="693.0" style="-fx-background-color: BFF6F9; -fx-padding: 1; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0);" textFill="#13a6ff" >
 					<font>
 						<Font name="System Bold" size="28.0" />
 					</font>
 				</Label>
+            
 			</children>
 		</AnchorPane>
 	</children>
