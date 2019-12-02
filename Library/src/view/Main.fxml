@@ -57,7 +57,7 @@
 					layoutX="756.0" layoutY="17.0" mnemonicParsing="false"
 					prefHeight="42.0" prefWidth="106.0"
 					style="-fx-background-color: BFF6F9; -fx-padding: 10; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, black, 10, 0, 0, 0);"
-					text="Logout" textAlignment="CENTER" textFill="#13a6ff"
+					text="Logout" onAction="#logout" textAlignment="CENTER" textFill="#13a6ff"
 					underline="true" />
 				<Label fx:id="lblWelcome" alignment="CENTER"
 					contentDisplay="RIGHT" layoutX="25.0" layoutY="17.0"

@@ -9,7 +9,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -18,6 +22,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import objects.Member;
 import utils.ConnectedUser;
 import utils.Const;
@@ -59,16 +65,33 @@ public class MainController implements Initializable {
 		String title = "";
 		if (ConnectedUser.connUser.getGender().equals(Const.MALE))
 			title = "Mr";
+		
 		else
 			title = "Ms";
 		lblWelcome.setText(String.format("Welcome %s. %s %s!", title, ConnectedUser.connUser.getFirstName(),
 				ConnectedUser.connUser.getLastName()));
+		
 
 		// ************************** Member tab **************************//
 		
 
 		// ************************** Member tab **************************//
+		
+
 	}
+	public void logout(ActionEvent event) throws Exception {
+		
+		 Node node=(Node) event.getSource();
+      	  Stage stage=(Stage) node.getScene().getWindow();
+      	
+      	 FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+		      Parent root = loader.load();
+		     
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		
+}
 
 
 }
