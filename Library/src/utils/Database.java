@@ -73,8 +73,8 @@ public class Database {
 		librarian.setFirstName("Ochirsuren");
 		librarian.setLastLoginDate(new Date());
 		librarian.setLastName("Surakhbayar");
-		librarian.setLoginName("ochirsuren");
-		librarian.setPassword("ochirsuren");
+		librarian.setLoginName("1");
+		librarian.setPassword("1");
 		librarian.setSsn(1);
 		librarian.setGender(Const.MALE);
 		librarian.setAdminAccess(true);

@@ -38,7 +38,7 @@
 						</Tab>
 						<Tab text="Books">
 							<content>
-								<fx:include fx:id="Book" source="Book.fxml" />
+								<fx:include fx:id="Book" source="AddBook.fxml" />
 							</content>
 						</Tab>
 						<Tab text="Overdue books">
