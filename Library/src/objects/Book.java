@@ -190,6 +190,11 @@ public class Book implements Serializable {
 		result += "\n Number of Pages : " + this.numPage;
 		result += "\n Release year : " + this.releaseYear;
 		result += "\n Category : " + this.category;
+		result += "\n Borrowed date : " + this.borrowedDate;
+		result += "\n Borrowed date : " + this.borrowedDate;
+		result += "\n Due date : " + this.dueDate;
+		result += "\n___________________________________________";
+
 
 		return result;
 	}

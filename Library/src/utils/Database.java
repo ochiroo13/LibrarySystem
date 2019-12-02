@@ -35,66 +35,10 @@ public class Database {
 		initLibrarians();
 		initUsers();
 		initMembers();
-		initBooks();
+		
 	}
 
-	private void initBooks() {
-	listBook= new ArrayList<Book>();
-    Book bk = new Book();
-    bk.setId(1);
-    bk.setName("title 1");
-    bk.setAuthorName("name 1");
-    listBook.add(bk);
-    
-    bk = new Book();
-    bk.setId(2);
-    bk.setName("title 2");
-    bk.setAuthorName("name 2");
-    listBook.add(bk);
-    
-    bk = new Book();
-    bk.setId(3);
-    bk.setName("title 3");
-    bk.setAuthorName("name 3");
-    listBook.add(bk);
-    
-    bk = new Book();
-    bk.setId(4);
-    bk.setName("title 4");
-    bk.setAuthorName("name 4");
-    listBook.add(bk);
-    
-    bk = new Book();
-    bk.setId(5);
-    bk.setName("title 5");
-    bk.setAuthorName("name5");
-    listBook.add(bk);
-    
-    bk = new Book();
-    bk.setId(6);
-    bk.setName("title 6");
-    bk.setAuthorName("name 6");
-    listBook.add(bk);
-    
-    bk = new Book();
-    bk.setId(7);
-    bk.setName("title 7");
-    bk.setAuthorName("name 7");
-    listBook.add(bk);
-    
-    bk = new Book();
-    bk.setId(8);
-    bk.setName("title 8");
-    bk.setAuthorName("name 8");
-    listBook.add(bk);
-    
-    bk = new Book();
-    bk.setId(9);
-    bk.setName("title 9");
-    bk.setAuthorName("name 9");
-    listBook.add(bk);
-	}
-	 
+	
 	private void initAdmins() {
 		listAdmin = new ArrayList<Administrator>();
 
