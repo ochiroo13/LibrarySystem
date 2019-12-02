@@ -15,6 +15,8 @@ public class Book {
 	private Member borrower;
 
 	private Date borrowedDate;
+	
+	private String borrowedDateStr;
 
 	private Date dueDate;
 
@@ -25,11 +27,28 @@ public class Book {
 	private User modifiedBy;
 
 	private Date modifiedDate;
+	
+	private String borrowerName;
 
 	public int getId() {
 		return id;
 	}
-
+	
+	public String getBorrowerName() {
+		return borrowerName;
+	}
+   
+	public void setBorrowedDateStr(String s) {
+		borrowedDateStr=s;
+	}
+	
+	public String getBorrowedDateStr() {
+		return borrowedDateStr;
+	}
+	
+	public void setBorrowerName(String s) {
+		borrowerName=s;
+	}
 	public void setId(int id) {
 		this.id = id;
 	}

@@ -1,33 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="view.CheckoutController">
-	<children>
-		<TableView fx:id="COtable" layoutX="27.0" layoutY="28.0"
-			prefHeight="283.0" prefWidth="671.0">
-			<columns>
-				<TableColumn prefWidth="75.0" text="C1" />
-				<TableColumn prefWidth="75.0" text="C2" />
-			</columns>
-		</TableView>
-		<ComboBox fx:id="COMember" layoutX="134.0" layoutY="337.0"
-			prefWidth="150.0" />
-		<ComboBox fx:id="COBook" layoutX="134.0" layoutY="377.0"
-			prefWidth="150.0" />
-		<Label layoutX="69.0" layoutY="341.0" prefHeight="17.0"
-			prefWidth="50.0" text="Member" />
-		<Label layoutX="80.0" layoutY="381.0" text="Book" />
-		<Button fx:id="CObutton" layoutX="370.0" layoutY="377.0"
-			mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0"
-			text="Checkout Book" />
-	</children>
+<AnchorPane prefHeight="382.0000999999975" prefWidth="760.9998779296875" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="view.CheckoutController">
+  <children>
+    <TableView id="COtable" fx:id="tblCOB" layoutX="14.0" layoutY="53.0" prefHeight="258.0" prefWidth="416.0" />
+    <Button id="CObutton" fx:id="btnCOB" layoutX="449.0" layoutY="343.0" mnemonicParsing="false" onAction="#btnCheckoutBook" prefHeight="25.0" prefWidth="125.0" text="Checkout Book" />
+    <ListView fx:id="listMembers" layoutX="437.0" layoutY="53.0" prefHeight="258.0" prefWidth="150.0" />
+    <ListView fx:id="listBooks" layoutX="597.0" layoutY="53.0" prefHeight="258.0" prefWidth="150.0" />
+    <DatePicker fx:id="borrowedDate" layoutX="600.0" layoutY="340.0" prefHeight="31.0" prefWidth="150.0" />
+    <Label layoutX="449.0" layoutY="25.0" text="Library members" />
+    <Label layoutX="654.0" layoutY="25.0" text="Availabe books" />
+    <Label layoutX="165.0" layoutY="30.0" prefWidth="143.0" text="All books checkout status" />
+    <Label layoutX="597.0" layoutY="317.0" prefWidth="102.0" text="Borrowed date" />
+  </children>
 </AnchorPane>
