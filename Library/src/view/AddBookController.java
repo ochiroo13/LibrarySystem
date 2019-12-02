@@ -91,4 +91,13 @@ public class AddBookController {
 
 
    	}
+    
+    @FXML
+    public void deleteAuthor(ActionEvent event)
+    
+    {   
+    	list.remove(authorList.getSelectionModel().getSelectedIndex());
+    	authorList.getItems().remove(authorList.getSelectionModel().getSelectedIndex());
+    	
+    }
 }
