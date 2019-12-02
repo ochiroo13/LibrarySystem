@@ -33,6 +33,10 @@ public class LoginController {
 
 	public void login(ActionEvent event) throws Exception {
 		ConnectedUser connUser = new ConnectedUser();
+		txtUserName.setText("uuganbayar");
+		pwdPassword.setText("uuganbayar");
+		
+	
 		if (txtUserName.getText().isEmpty()) {
 			alert.setAlertType(AlertType.INFORMATION);
 			alert.setContentText("Login name is empty!");
