@@ -195,7 +195,6 @@ public class Book implements Serializable {
 		result += "\n Due date : " + this.dueDate;
 		result += "\n___________________________________________";
 
-
 		return result;
 	}
 
@@ -225,7 +224,7 @@ public class Book implements Serializable {
 		ObjectInputStream in = new ObjectInputStream(fileIn);
 
 		BookLog book = (BookLog) in.readObject();
-		Book.bookList.list = book.list;
+		Book.bookList.list.addAll(book.list);
 
 		for (Book bk : book.list)
 			System.out.println(bk);
