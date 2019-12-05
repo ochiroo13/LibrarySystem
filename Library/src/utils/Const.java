@@ -1,6 +1,6 @@
 package utils;
 
-public class Const {
+public final class Const {
 
 	public static final String MALE = "male";
 	public static final String FEMALE = "female";

@@ -124,8 +124,12 @@ public class MemberController implements Initializable {
 				txtLastNameMember.setText(newSelection.getLastName());
 				txtPhoneMember.setText(newSelection.getPhone());
 				txtEmailMember.setText(newSelection.getEmail());
-				datBirthDateMember
-						.setValue(newSelection.getBirthDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+				if (newSelection.getBirthDate() != null) {
+					datBirthDateMember.setValue(
+							newSelection.getBirthDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+				} else {
+					datBirthDateMember.setValue(null);
+				}
 				cboGenderMember.setValue(newSelection.getGender());
 			}
 		});
@@ -139,7 +143,6 @@ public class MemberController implements Initializable {
 
 	public void clickSaveMember(ActionEvent event) {
 
-		toggleMember();
 		System.out.println("clickSaveMember");
 
 		if (!ConnectedUser.connUser.isAdminAccess()) {
@@ -157,8 +160,12 @@ public class MemberController implements Initializable {
 			newMember.setPhone(txtPhoneMember.getText());
 			newMember.setFirstName(txtFirstNameMember.getText());
 			newMember.setLastName(txtLastNameMember.getText());
-			newMember.setBirthDate(
-					Date.from(datBirthDateMember.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+			if (datBirthDateMember.getValue() != null) {
+				newMember.setBirthDate(
+						Date.from(datBirthDateMember.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+			} else {
+				datBirthDateMember.setValue(null);
+			}
 			newMember.setGender(cboGenderMember.getValue());
 			newMember.setCheckedOutBooks(null);
 			Database.listMember.add(newMember);
@@ -169,8 +176,12 @@ public class MemberController implements Initializable {
 					m.setPhone(txtPhoneMember.getText());
 					m.setFirstName(txtFirstNameMember.getText());
 					m.setLastName(txtLastNameMember.getText());
-					m.setBirthDate(
-							Date.from(datBirthDateMember.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+					if (datBirthDateMember.getValue() != null) {
+						m.setBirthDate(Date
+								.from(datBirthDateMember.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+					} else {
+						m.setBirthDate(null);
+					}
 					m.setGender(cboGenderMember.getValue());
 				}
 			}

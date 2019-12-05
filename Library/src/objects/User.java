@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public abstract class User implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private int ssn;
@@ -28,6 +28,11 @@ public abstract class User implements Serializable {
 	private boolean librarianAccess;
 
 	private String pictureUrl;
+
+	public User(boolean adminAccess, boolean librarianAccess) {
+		this.adminAccess = adminAccess;
+		this.librarianAccess = librarianAccess;
+	}
 
 	public int getSsn() {
 		return ssn;
