@@ -94,9 +94,10 @@ public class AddBookController {
     			ConnectedUser.connUser, 
     			Calendar.getInstance().getTime(), 
     			list);
-    	
+         Book.bookList.list.add(book);
     	
      	try {
+     		
 			book.addBook("books.txt");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

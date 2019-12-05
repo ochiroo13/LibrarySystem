@@ -1,9 +1,11 @@
 package objects;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Member {
+public class Member implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private int id;
 
@@ -123,6 +125,15 @@ public class Member {
 
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
+	}
+	
+	@Override
+	public String toString() {
+		String result = "";
+		result += "\n ID : " + this.id;
+		result += "\n Name : " + this.firstName;
+		result += "\n Email : "+this.email;
+		return result;
 	}
 
 }

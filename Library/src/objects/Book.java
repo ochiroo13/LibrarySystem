@@ -208,11 +208,10 @@ public class Book implements Serializable {
 
 	}
 
-	public void addBook(String filename) throws IOException, ClassNotFoundException {
-		control(filename);
+	public static void addBook(String filename) throws IOException, ClassNotFoundException {
+	
 		FileOutputStream file = new FileOutputStream(filename);
 		ObjectOutputStream out = new ObjectOutputStream(file);
-		bookList.list.add(this);
 
 		out.writeObject(bookList);
 		out.close();
