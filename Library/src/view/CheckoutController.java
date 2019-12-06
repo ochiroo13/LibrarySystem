@@ -55,6 +55,7 @@ public class CheckoutController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		System.out.println(location);
+		
 		initForm();
 	}
    
@@ -69,7 +70,7 @@ public class CheckoutController implements Initializable {
 		
 	}
 	
-	public void btnCheckoutBook() throws ClassNotFoundException, IOException {
+	public void btnCheckoutBook()  throws ClassNotFoundException, IOException {
 	 	
 		 if (listBooks.getSelectionModel().isEmpty()==true || listMembers.getSelectionModel().isEmpty()==true || borrowedDate.getValue().equals(null)  ) {
           return;			 
@@ -91,6 +92,7 @@ public class CheckoutController implements Initializable {
     	    }
        }
        
+     
        RefreshCOBForm();
        
 	}
@@ -138,13 +140,14 @@ public class CheckoutController implements Initializable {
 		tblCOB.getColumns().addAll(colBookID, colTitle,colAuthor, colBorrower, colBorDate);
 		Book.addBook("books.txt");
 		     listBooks.getItems().clear();
+		    
 		for (int i = 0; i < Book.bookList.list.size(); i++) {
 			if (Book.bookList.list.get(i).getBorrower()==null) {
-				
+			     System.out.println("nn="+listBooks.getItems().toString());
 			  listBooks.getItems().add(Book.bookList.list.get(i).gettittle());
 			}
-			initForm();
 		}
+		
 	}
 	
 	
