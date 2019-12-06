@@ -208,7 +208,7 @@ public class Book implements Serializable {
 	}
 
 	public static void addBook(String filename) throws IOException, ClassNotFoundException {
-	
+
 		FileOutputStream file = new FileOutputStream(filename);
 		ObjectOutputStream out = new ObjectOutputStream(file);
 
@@ -223,12 +223,8 @@ public class Book implements Serializable {
 		ObjectInputStream in = new ObjectInputStream(fileIn);
 
 		BookLog book = (BookLog) in.readObject();
-		Book.bookList.list.addAll(book.list);
+		Book.bookList.list = book.list;
 
-		for (Book bk : book.list)
-			System.out.println(bk);
-
-		System.out.println(book.list.size());
 		in.close();
 		fileIn.close();
 

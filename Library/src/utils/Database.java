@@ -159,31 +159,6 @@ public class Database {
 	}
 
 	private void initBook() {
-		listBook = new ArrayList<Book>();
-
-		Book book1 = new Book(10, "Harry Potter", 2000, new Date(), "Fiction", listUser.get(0), new Date(), null);
-		Calendar calendar = new GregorianCalendar(2013, 0, 31);
-		Date date = calendar.getTime();
-		book1.setDueDate(date);
-		Book.bookList.list.add(book1);
-
-		book1 = new Book(11, "At wood", 2000, new Date(), "Romance", listUser.get(0), new Date(), null);
-		calendar = new GregorianCalendar(2019, 10, 15);
-		date = calendar.getTime();
-		book1.setDueDate(date);
-		Book.bookList.list.add(book1);
-
-		book1 = new Book(12, "Subtle art of not giving !@#$", 2000, new Date(), "Romance", listUser.get(0), new Date(),
-				null);
-		calendar = new GregorianCalendar(2019, 10, 15);
-		date = calendar.getTime();
-		book1.setDueDate(date);
-		Book.bookList.list.add(book1);
-
-		book1 = new Book(13, "Harism", 2000, new Date(), "Romance", listUser.get(0), new Date(), null);
-		calendar = new GregorianCalendar(2020, 0, 1);
-		date = calendar.getTime();
-		book1.setDueDate(date);
-		Book.bookList.list.add(book1);
+		
 	}
 }

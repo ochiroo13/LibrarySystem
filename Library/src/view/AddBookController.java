@@ -2,6 +2,7 @@ package view;
 
 import objects.Book;
 import objects.BookLog;
+import objects.InputException;
 import objects.User;
 import utils.ConnectedUser;
 import javafx.scene.paint.Color;
@@ -26,117 +27,137 @@ import objects.Author;
 
 public class AddBookController {
 
-    @FXML
-    TextField bookTittle;
-    @FXML
-    TextField bookNum;
-    @FXML
-    TextField bookCategory;
-    @FXML
-    DatePicker bookRyear;
-    @FXML
-    ListView<String> authorList ;
-    @FXML
-    TextField authorName ;
-    @FXML
-    TextField authorSurname ;
-    @FXML
-    Label tittle,numberOfPages,category,name,surname,publishedYear,authors ;
-    List< Control> control = new ArrayList<>();
-    List<Author> list = new ArrayList<>();
+	@FXML
+	TextField bookTittle;
+	@FXML
+	TextField bookNum;
+	@FXML
+	TextField bookCategory;
+	@FXML
+	DatePicker bookRyear;
+	@FXML
+	ListView<String> authorList;
+	@FXML
+	TextField authorName;
+	@FXML
+	TextField authorSurname;
+	@FXML
+	Label tittle, numberOfPages, category, name, surname, publishedYear, authors;
+	List<Author> list = new ArrayList<>();
+	HashMap<Label, Control> control = new HashMap<Label, Control>();
 
-    // called by the FXML loader after the labels declared above are injected:
-    public void initialize() {
+	// called by the FXML loader after the labels declared above are injected:
+	public void initialize() {
 
-        this.control.add( bookTittle) ;
-        this.control.add( bookCategory);
-        this.control.add(bookNum);
-        this.control.add( authorList);
-        this.control.add( bookRyear);
-        
+		this.control.put(tittle, bookTittle);
+		this.control.put(category, bookCategory);
+		this.control.put(numberOfPages, bookNum);
+		this.control.put(authors, authorList);
+		this.control.put(publishedYear, bookRyear);
 
-
-    }
-    
-  class Clear implements Consumer<Control>{
-
-	@Override
-	public void accept(Control arg0) {
-		if(arg0 instanceof TextField) ((TextField) arg0).setText("");
-		else if(arg0 instanceof ListView) ((ListView) arg0).getItems().clear();
-		else   ((DatePicker)arg0).setValue(null);
-		
 	}
-	  
-	  
-	  
-  } 
 
-    public void control( )
-    {   Consumer < Control> action = new Clear(); 
-                         
-    	control.forEach(action);
-    	this.list.clear();
-    	
-    	
-    }
-  
-  
-    @FXML
-	public void addBook(ActionEvent event) throws ClassNotFoundException
-	{
-    	
-         Book book = new Book(Book.bookList.list.size(), 
-    			bookTittle.getText(),
-    			Integer.parseInt(bookNum.getText()),
-    			Date.from(bookRyear.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()),
-    			bookCategory.getText(),
-    			ConnectedUser.connUser, 
-    			Calendar.getInstance().getTime(), 
-    			list);
-         Book.bookList.list.add(book);
-    	
-     	try {
-     		
-			book.addBook("books.txt");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	class Clear implements BiConsumer<Label, Control> {
+
+		@Override
+		public void accept(Label label, Control control) {
+			label.setTextFill(Color.web("#13a6ff"));
+
+			if (control instanceof TextField)
+				((TextField) control).setText("");
+			else if (control instanceof ListView)
+				((ListView) control).getItems().clear();
+			else
+				((DatePicker) control).setValue(null);
+
 		}
-     	
-     	try {
-			Book.readBooks("books.txt");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-     	control();
-    	
+
 	}
-    
-    @FXML
-   	public void addAuthor(ActionEvent event)
-   	{
-   		Author auth = new Author(authorName.getText(), authorSurname.getText());
-   		
-		authorList.getItems().add(authorName.getText()+"  "+ authorSurname.getText());
+
+	public void control() {
+		BiConsumer<Label, Control> action = new Clear();
+
+		control.forEach(action);
+		this.list.clear();
+
+	}
+
+	public void addControl() throws Exception {
+		String error = "";
+		if (bookTittle.getText().isEmpty()) {
+			error += "* empty tittle \n";
+			tittle.setTextFill(Color.web("#ff0000"));
+		} else
+			tittle.setTextFill(Color.web("#13a6ff"));
+		try {
+
+			Integer.parseInt(bookNum.getText());
+			numberOfPages.setTextFill(Color.web("#13a6ff"));
+		}
+
+		catch (Exception e) {
+			numberOfPages.setTextFill(Color.web("#ff0000"));
+			error += "* invalid number of pages\\n";
+		}
+		if (bookCategory.getText().isEmpty()) {
+			error += "* empty category \n";
+			category.setTextFill(Color.web("#ff0000"));
+		} else
+			category.setTextFill(Color.web("#13a6ff"));
+
+		try {
+
+			Date.from(bookRyear.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+			publishedYear.setTextFill(Color.web("#13a6ff"));
+		} catch (Exception e) {
+			publishedYear.setTextFill(Color.web("#ff0000"));
+			error += "* invalid number of pages";
+		}
+
+		;
+		if (!error.isEmpty())
+			throw new InputException(error);
+
+	}
+
+	@FXML
+	public void addBook(ActionEvent event) throws Exception {
+
+		try {
+			this.addControl();
+
+			Book.bookList.list
+					.add(new Book(Book.bookList.list.size(), bookTittle.getText(), Integer.parseInt(bookNum.getText()),
+							Date.from(bookRyear.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()),
+							bookCategory.getText(), ConnectedUser.connUser, Calendar.getInstance().getTime(), list));
+
+			Book.addBook("books.txt");
+			this.control();
+
+		} catch (InputException e) {
+
+		}
+
+	}
+
+	@FXML
+	public void addAuthor(ActionEvent event) {
+		Author auth = new Author(authorName.getText(), authorSurname.getText());
+
+		authorList.getItems().add(authorName.getText() + "  " + authorSurname.getText());
 		authorName.setText("");
 		authorSurname.setText("");
 		list.add(auth);
 
+	}
 
+	@FXML
+	public void deleteAuthor(ActionEvent event)
 
-   	}
-    
-    @FXML
-    public void deleteAuthor(ActionEvent event)
-    
-    {   
-    	list.remove(authorList.getSelectionModel().getSelectedIndex());
-    	authorList.getItems().remove(authorList.getSelectionModel().getSelectedIndex());
-    	
-    }
+	{
+		list.remove(authorList.getSelectionModel().getSelectedIndex());
+		authorList.getItems().remove(authorList.getSelectionModel().getSelectedIndex());
+
+	}
 }

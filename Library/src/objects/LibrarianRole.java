@@ -1,6 +1,9 @@
 package objects;
 
-public class LibrarianRole extends Role {
+import java.io.Serializable;
+
+public class LibrarianRole extends Role implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private boolean canAddMember;
 
