@@ -168,7 +168,7 @@ public class MemberController implements Initializable {
 			}
 			newMember.setGender(cboGenderMember.getValue());
 			newMember.setCheckedOutBooks(null);
-			Database.listMember.add(newMember);
+			newMember.addMember();
 		} else {
 
 			if (!ConnectedUser.connUser.checkPermission(EOperation.UPDATE_MEMBER)) {
@@ -178,21 +178,26 @@ public class MemberController implements Initializable {
 				return;
 			}
 
-			for (Member m : Database.listMember) {
-				if (m.getId() == currentMemberId) {
-					m.setEmail(txtEmailMember.getText());
-					m.setPhone(txtPhoneMember.getText());
-					m.setFirstName(txtFirstNameMember.getText());
-					m.setLastName(txtLastNameMember.getText());
-					if (datBirthDateMember.getValue() != null) {
-						m.setBirthDate(Date
-								.from(datBirthDateMember.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-					} else {
-						m.setBirthDate(null);
-					}
-					m.setGender(cboGenderMember.getValue());
-				}
+			Member m = Member.getMemberById(currentMemberId);
+			if (m == null) {
+				alert.setAlertType(AlertType.INFORMATION);
+				alert.setContentText("Member not found id: " + currentMemberId);
+				alert.show();
+				return;
 			}
+			Member newMember = new Member();
+			newMember.setEmail(txtEmailMember.getText());
+			newMember.setPhone(txtPhoneMember.getText());
+			newMember.setFirstName(txtFirstNameMember.getText());
+			newMember.setLastName(txtLastNameMember.getText());
+			if (datBirthDateMember.getValue() != null) {
+				newMember.setBirthDate(
+						Date.from(datBirthDateMember.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+			} else {
+				newMember.setBirthDate(null);
+			}
+			newMember.setGender(cboGenderMember.getValue());
+			m.updateMember(newMember);
 		}
 
 		ObservableList<Member> data = FXCollections.observableArrayList(Database.listMember);
@@ -248,12 +253,8 @@ public class MemberController implements Initializable {
 			return;
 		}
 
-		for (Member m : Database.listMember) {
-			if (m.getId() == currentMemberId) {
-				Database.listMember.remove(m);
-				break;
-			}
-		}
+		Member m = Member.getMemberById(currentMemberId);
+		m.removeMember();
 
 		ObservableList<Member> data = FXCollections.observableArrayList(Database.listMember);
 

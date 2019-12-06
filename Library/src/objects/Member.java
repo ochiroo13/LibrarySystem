@@ -1,8 +1,11 @@
 package objects;
 
 import java.io.Serializable;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+
+import utils.Database;
 
 public class Member implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -126,14 +129,42 @@ public class Member implements Serializable {
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
-	
+
 	@Override
 	public String toString() {
 		String result = "";
 		result += "\n ID : " + this.id;
 		result += "\n Name : " + this.firstName;
-		result += "\n Email : "+this.email;
+		result += "\n Email : " + this.email;
 		return result;
+	}
+
+	public void addMember() {
+		Database.listMember.add(this);
+	}
+
+	public void updateMember(Member newMember) {
+		setEmail(newMember.getEmail());
+		setPhone(newMember.getPhone());
+		setFirstName(newMember.getFirstName());
+		setLastName(newMember.getLastName());
+		setBirthDate(newMember.getBirthDate());
+		setGender(newMember.getGender());
+	}
+
+	public void removeMember() {
+		Database.listMember.remove(this);
+	}
+
+	public static Member getMemberById(int id) {
+		Member member = null;
+		for (Member m : Database.listMember) {
+			if (m.getId() == id) {
+				member = m;
+			}
+		}
+
+		return member;
 	}
 
 }
