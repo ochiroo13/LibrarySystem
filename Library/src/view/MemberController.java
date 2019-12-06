@@ -26,6 +26,7 @@ import objects.Member;
 import utils.ConnectedUser;
 import utils.Const;
 import utils.Database;
+import utils.EOperation;
 
 public class MemberController implements Initializable {
 
@@ -143,16 +144,15 @@ public class MemberController implements Initializable {
 
 	public void clickSaveMember(ActionEvent event) {
 
-		System.out.println("clickSaveMember");
-
-		if (!ConnectedUser.connUser.isAdminAccess()) {
-			alert.setAlertType(AlertType.INFORMATION);
-			alert.setContentText("You don't have Administrator access!");
-			alert.show();
-			return;
-		}
-
 		if (memberTabState.equals(Const.ADD)) {
+
+			if (!ConnectedUser.connUser.checkPermission(EOperation.ADD_MEMBER)) {
+				alert.setAlertType(AlertType.INFORMATION);
+				alert.setContentText("You don't have Administrator access!");
+				alert.show();
+				return;
+			}
+
 			Member newMember = new Member();
 			Database.maxIdMember++;
 			newMember.setId(Database.maxIdMember);
@@ -168,23 +168,36 @@ public class MemberController implements Initializable {
 			}
 			newMember.setGender(cboGenderMember.getValue());
 			newMember.setCheckedOutBooks(null);
-			Database.listMember.add(newMember);
+			newMember.addMember();
 		} else {
-			for (Member m : Database.listMember) {
-				if (m.getId() == currentMemberId) {
-					m.setEmail(txtEmailMember.getText());
-					m.setPhone(txtPhoneMember.getText());
-					m.setFirstName(txtFirstNameMember.getText());
-					m.setLastName(txtLastNameMember.getText());
-					if (datBirthDateMember.getValue() != null) {
-						m.setBirthDate(Date
-								.from(datBirthDateMember.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-					} else {
-						m.setBirthDate(null);
-					}
-					m.setGender(cboGenderMember.getValue());
-				}
+
+			if (!ConnectedUser.connUser.checkPermission(EOperation.UPDATE_MEMBER)) {
+				alert.setAlertType(AlertType.INFORMATION);
+				alert.setContentText("You don't have Administrator access!");
+				alert.show();
+				return;
 			}
+
+			Member m = Member.getMemberById(currentMemberId);
+			if (m == null) {
+				alert.setAlertType(AlertType.INFORMATION);
+				alert.setContentText("Member not found id: " + currentMemberId);
+				alert.show();
+				return;
+			}
+			Member newMember = new Member();
+			newMember.setEmail(txtEmailMember.getText());
+			newMember.setPhone(txtPhoneMember.getText());
+			newMember.setFirstName(txtFirstNameMember.getText());
+			newMember.setLastName(txtLastNameMember.getText());
+			if (datBirthDateMember.getValue() != null) {
+				newMember.setBirthDate(
+						Date.from(datBirthDateMember.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+			} else {
+				newMember.setBirthDate(null);
+			}
+			newMember.setGender(cboGenderMember.getValue());
+			m.updateMember(newMember);
 		}
 
 		ObservableList<Member> data = FXCollections.observableArrayList(Database.listMember);
@@ -233,19 +246,15 @@ public class MemberController implements Initializable {
 
 	private void removeMember(int memberId) {
 
-		if (!ConnectedUser.connUser.isAdminAccess()) {
+		if (!ConnectedUser.connUser.checkPermission(EOperation.REMOVE_MEMBER)) {
 			alert.setAlertType(AlertType.INFORMATION);
 			alert.setContentText("You don't have Administrator access!");
 			alert.show();
 			return;
 		}
 
-		for (Member m : Database.listMember) {
-			if (m.getId() == currentMemberId) {
-				Database.listMember.remove(m);
-				break;
-			}
-		}
+		Member m = Member.getMemberById(currentMemberId);
+		m.removeMember();
 
 		ObservableList<Member> data = FXCollections.observableArrayList(Database.listMember);
 
