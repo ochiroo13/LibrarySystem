@@ -8,10 +8,16 @@ public class LibrarianRole extends Role {
 
 	private boolean canRemoveMember;
 
+	private boolean canAddBook;
+
+	private boolean canCheckout;
+
 	public LibrarianRole() {
 		setCanAddMember(false);
 		setCanEditMember(false);
 		setCanRemoveMember(false);
+		setCanAddBook(false);
+		setCanCheckout(true);
 	}
 
 	public boolean isCanAddMember() {
@@ -36,6 +42,22 @@ public class LibrarianRole extends Role {
 
 	public void setCanRemoveMember(boolean canRemoveMember) {
 		this.canRemoveMember = canRemoveMember;
+	}
+
+	public boolean isCanAddBook() {
+		return canAddBook;
+	}
+
+	public void setCanAddBook(boolean canAddBook) {
+		this.canAddBook = canAddBook;
+	}
+
+	public boolean isCanCheckout() {
+		return canCheckout;
+	}
+
+	public void setCanCheckout(boolean canCheckout) {
+		this.canCheckout = canCheckout;
 	}
 
 }

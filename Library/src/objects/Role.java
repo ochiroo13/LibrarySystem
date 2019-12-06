@@ -8,6 +8,10 @@ abstract public class Role {
 
 	private boolean canRemoveMember;
 
+	private boolean canAddBook;
+
+	private boolean canCheckout;
+
 	public boolean isCanAddMember() {
 		return canAddMember;
 	}
@@ -30,6 +34,22 @@ abstract public class Role {
 
 	public void setCanRemoveMember(boolean canRemoveMember) {
 		this.canRemoveMember = canRemoveMember;
+	}
+
+	public boolean isCanAddBook() {
+		return canAddBook;
+	}
+
+	public void setCanAddBook(boolean canAddBook) {
+		this.canAddBook = canAddBook;
+	}
+
+	public boolean isCanCheckout() {
+		return canCheckout;
+	}
+
+	public void setCanCheckout(boolean canCheckout) {
+		this.canCheckout = canCheckout;
 	}
 
 }
