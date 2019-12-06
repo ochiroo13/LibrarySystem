@@ -168,6 +168,8 @@ public class MemberController implements Initializable {
 			}
 			newMember.setGender(cboGenderMember.getValue());
 			newMember.setCheckedOutBooks(null);
+			newMember.setCreatedBy(ConnectedUser.connUser);
+			newMember.setCreatedDate(new Date());
 			newMember.addMember();
 		} else {
 
@@ -197,6 +199,8 @@ public class MemberController implements Initializable {
 				newMember.setBirthDate(null);
 			}
 			newMember.setGender(cboGenderMember.getValue());
+			newMember.setModifiedBy(ConnectedUser.connUser);
+			newMember.setModifiedDate(new Date());
 			m.updateMember(newMember);
 		}
 
@@ -268,7 +272,7 @@ public class MemberController implements Initializable {
 	}
 
 	private void addButtonToTable() {
-		TableColumn<Member, Void> colBtn = new TableColumn("");
+		TableColumn<Member, Void> colBtn = new TableColumn<Member, Void>();
 
 		Callback<TableColumn<Member, Void>, TableCell<Member, Void>> cellFactory = new Callback<TableColumn<Member, Void>, TableCell<Member, Void>>() {
 			@Override
