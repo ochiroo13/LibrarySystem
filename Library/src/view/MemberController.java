@@ -26,6 +26,7 @@ import objects.Member;
 import utils.ConnectedUser;
 import utils.Const;
 import utils.Database;
+import utils.EOperation;
 
 public class MemberController implements Initializable {
 
@@ -143,16 +144,15 @@ public class MemberController implements Initializable {
 
 	public void clickSaveMember(ActionEvent event) {
 
-		System.out.println("clickSaveMember");
-
-		if (!ConnectedUser.connUser.isAdminAccess()) {
-			alert.setAlertType(AlertType.INFORMATION);
-			alert.setContentText("You don't have Administrator access!");
-			alert.show();
-			return;
-		}
-
 		if (memberTabState.equals(Const.ADD)) {
+
+			if (!ConnectedUser.connUser.checkPermission(EOperation.ADD_MEMBER)) {
+				alert.setAlertType(AlertType.INFORMATION);
+				alert.setContentText("You don't have Administrator access!");
+				alert.show();
+				return;
+			}
+
 			Member newMember = new Member();
 			Database.maxIdMember++;
 			newMember.setId(Database.maxIdMember);
@@ -170,6 +170,14 @@ public class MemberController implements Initializable {
 			newMember.setCheckedOutBooks(null);
 			Database.listMember.add(newMember);
 		} else {
+
+			if (!ConnectedUser.connUser.checkPermission(EOperation.UPDATE_MEMBER)) {
+				alert.setAlertType(AlertType.INFORMATION);
+				alert.setContentText("You don't have Administrator access!");
+				alert.show();
+				return;
+			}
+
 			for (Member m : Database.listMember) {
 				if (m.getId() == currentMemberId) {
 					m.setEmail(txtEmailMember.getText());
@@ -233,7 +241,7 @@ public class MemberController implements Initializable {
 
 	private void removeMember(int memberId) {
 
-		if (!ConnectedUser.connUser.isAdminAccess()) {
+		if (!ConnectedUser.connUser.checkPermission(EOperation.REMOVE_MEMBER)) {
 			alert.setAlertType(AlertType.INFORMATION);
 			alert.setContentText("You don't have Administrator access!");
 			alert.show();

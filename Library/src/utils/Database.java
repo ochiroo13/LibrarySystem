@@ -6,17 +6,13 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import objects.Administrator;
+import objects.AdministratorRole;
 import objects.Book;
-import objects.Librarian;
+import objects.LibrarianRole;
 import objects.Member;
 import objects.User;
 
 public class Database {
-
-	public static List<Administrator> listAdmin;
-
-	public static List<Librarian> listLibrarian;
 
 	public static List<User> listUser;
 
@@ -33,114 +29,105 @@ public class Database {
 	public static int maxIdBook;
 
 	public void initData() {
-		initAdmins();
-		initLibrarians();
 		initUsers();
 		initMembers();
 		initBook();
 
 	}
 
-	private void initAdmins() {
-		listAdmin = new ArrayList<Administrator>();
-
-		Administrator admin = new Administrator();
-		admin.setEmail("admin1@mum.edu");
-		admin.setFirstName("Admin");
-		admin.setLastLoginDate(new Date());
-		admin.setLastName("Inistrator1");
-		admin.setLoginName("admin1");
-		admin.setPassword("password");
-		admin.setSsn(1);
-		admin.setGender(Const.MALE);
-		listAdmin.add(admin);
-
-		Administrator admin2 = new Administrator();
-		admin2.setEmail("admin2@mum.edu");
-		admin2.setFirstName("Admin2");
-		admin2.setLastLoginDate(new Date());
-		admin2.setLastName("Inistrator2");
-		admin2.setLoginName("admin2");
-		admin2.setPassword("password");
-		admin2.setSsn(2);
-		admin2.setGender(Const.FEMALE);
-		listAdmin.add(admin2);
-
-		maxIdAdmin = listAdmin.size();
-	}
-
-	private void initLibrarians() {
-		listLibrarian = new ArrayList<Librarian>();
-
-		Librarian librarian = new Librarian();
-		librarian.setEmail("Ochirsuren@mum.edu");
-		librarian.setFirstName("Ochirsuren");
-		librarian.setLastLoginDate(new Date());
-		librarian.setLastName("Surakhbayar");
-		librarian.setLoginName("ochirsuren");
-		librarian.setPassword("1");
-		librarian.setSsn(1);
-		librarian.setGender(Const.MALE);
-		librarian.setAdminAccess(true);
-		librarian.setPictureUrl("Ochirsuren.jpg");
-		listLibrarian.add(librarian);
-
-		Librarian librarian2 = new Librarian();
-		librarian2.setEmail("Bassem@mum.edu");
-		librarian2.setFirstName("Bassem");
-		librarian2.setLastLoginDate(new Date());
-		librarian2.setLastName("El Sawy");
-		librarian2.setLoginName("bassem");
-		librarian2.setPassword("bassem");
-		librarian2.setSsn(1);
-		librarian2.setGender(Const.MALE);
-		librarian2.setPictureUrl("Bassem.jpg");
-		listLibrarian.add(librarian2);
-
-		Librarian librarian3 = new Librarian();
-		librarian3.setEmail("Ahmad@mum.edu");
-		librarian3.setFirstName("Ahmad");
-		librarian3.setLastLoginDate(new Date());
-		librarian3.setLastName("Rashaideh");
-		librarian3.setLoginName("ahmad");
-		librarian3.setPassword("ahmad");
-		librarian3.setSsn(1);
-		librarian3.setGender(Const.MALE);
-		librarian3.setPictureUrl("Ahmad.jpg");
-		listLibrarian.add(librarian3);
-
-		Librarian librarian4 = new Librarian();
-		librarian4.setEmail("Uuganbayar@mum.edu");
-		librarian4.setFirstName("Uuganbayar");
-		librarian4.setLastLoginDate(new Date());
-		librarian4.setLastName("Oyun");
-		librarian4.setLoginName("uuganbayar");
-		librarian4.setPassword("uuganbayar");
-		librarian4.setSsn(1);
-		librarian4.setGender(Const.MALE);
-		librarian4.setPictureUrl("Uuganbayar.jpg");
-		listLibrarian.add(librarian4);
-
-		Librarian librarian5 = new Librarian();
-		librarian5.setEmail("Oussama@mum.edu");
-		librarian5.setFirstName("Oussama");
-		librarian5.setLastLoginDate(new Date());
-		librarian5.setLastName("Jablaou");
-		librarian5.setLoginName("oussama");
-		librarian5.setPassword("oussama");
-		librarian5.setSsn(1);
-		librarian5.setGender(Const.MALE);
-		librarian5.setPictureUrl("Oussama.jpg");
-		listLibrarian.add(librarian5);
-
-		maxIdLibrarian = listLibrarian.size();
-	}
-
 	private void initUsers() {
 		listUser = new ArrayList<User>();
 
-		listUser.addAll(listAdmin);
-		listUser.addAll(listLibrarian);
+		User user = new User();
+		user.setEmail("admin1@mum.edu");
+		user.setFirstName("Admin");
+		user.setLastLoginDate(new Date());
+		user.setLastName("Inistrator1");
+		user.setLoginName("admin1");
+		user.setPassword("password");
+		user.setSsn(1);
+		user.setGender(Const.MALE);
+		user.addRole(new AdministratorRole());
+		listUser.add(user);
+
+		user = new User();
+		user.setEmail("admin2@mum.edu");
+		user.setFirstName("Admin2");
+		user.setLastLoginDate(new Date());
+		user.setLastName("Inistrator2");
+		user.setLoginName("admin2");
+		user.setPassword("password");
+		user.setSsn(2);
+		user.setGender(Const.FEMALE);
+		user.addRole(new AdministratorRole());
+		listUser.add(user);
+
+		user = new User();
+		user.setEmail("Ochirsuren@mum.edu");
+		user.setFirstName("Ochirsuren");
+		user.setLastLoginDate(new Date());
+		user.setLastName("Surakhbayar");
+		user.setLoginName("ochirsuren");
+		user.setPassword("1");
+		user.setSsn(1);
+		user.setGender(Const.MALE);
+		user.addRole(new LibrarianRole());
+		user.addRole(new AdministratorRole());
+		user.setPictureUrl("Ochirsuren.jpg");
+		listUser.add(user);
+
+		user = new User();
+		user.setEmail("Bassem@mum.edu");
+		user.setFirstName("Bassem");
+		user.setLastLoginDate(new Date());
+		user.setLastName("El Sawy");
+		user.setLoginName("bassem");
+		user.setPassword("bassem");
+		user.setSsn(1);
+		user.setGender(Const.MALE);
+		user.addRole(new LibrarianRole());
+		user.setPictureUrl("Bassem.jpg");
+		listUser.add(user);
+
+		user = new User();
+		user.setEmail("Ahmad@mum.edu");
+		user.setFirstName("Ahmad");
+		user.setLastLoginDate(new Date());
+		user.setLastName("Rashaideh");
+		user.setLoginName("ahmad");
+		user.setPassword("ahmad");
+		user.setSsn(1);
+		user.setGender(Const.MALE);
+		user.addRole(new LibrarianRole());
+		user.setPictureUrl("Ahmad.jpg");
+		listUser.add(user);
+
+		user = new User();
+		user.setEmail("Uuganbayar@mum.edu");
+		user.setFirstName("Uuganbayar");
+		user.setLastLoginDate(new Date());
+		user.setLastName("Oyun");
+		user.setLoginName("uuganbayar");
+		user.setPassword("uuganbayar");
+		user.setSsn(1);
+		user.setGender(Const.MALE);
+		user.addRole(new LibrarianRole());
+		user.setPictureUrl("Uuganbayar.jpg");
+		listUser.add(user);
+
+		user = new User();
+		user.setEmail("Oussama@mum.edu");
+		user.setFirstName("Oussama");
+		user.setLastLoginDate(new Date());
+		user.setLastName("Jablaou");
+		user.setLoginName("oussama");
+		user.setPassword("oussama");
+		user.setSsn(1);
+		user.setGender(Const.MALE);
+		user.addRole(new LibrarianRole());
+		user.setPictureUrl("Oussama.jpg");
+		listUser.add(user);
+
 	}
 
 	private void initMembers() {

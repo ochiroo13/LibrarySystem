@@ -1,9 +1,13 @@
 package objects;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public abstract class User implements Serializable {
+import utils.EOperation;
+
+public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -23,16 +27,9 @@ public abstract class User implements Serializable {
 
 	private String gender;
 
-	private boolean adminAccess;
-
-	private boolean librarianAccess;
+	private List<Role> lstRoles;
 
 	private String pictureUrl;
-
-	public User(boolean adminAccess, boolean librarianAccess) {
-		this.adminAccess = adminAccess;
-		this.librarianAccess = librarianAccess;
-	}
 
 	public int getSsn() {
 		return ssn;
@@ -98,22 +95,6 @@ public abstract class User implements Serializable {
 		this.gender = gender;
 	}
 
-	public boolean isAdminAccess() {
-		return adminAccess;
-	}
-
-	public void setAdminAccess(boolean adminAccess) {
-		this.adminAccess = adminAccess;
-	}
-
-	public boolean isLibrarianAccess() {
-		return librarianAccess;
-	}
-
-	public void setLibrarianAccess(boolean librarianAccess) {
-		this.librarianAccess = librarianAccess;
-	}
-
 	public String getPictureUrl() {
 		return pictureUrl;
 	}
@@ -122,4 +103,42 @@ public abstract class User implements Serializable {
 		this.pictureUrl = pictureUrl;
 	}
 
+	public List<Role> getLstRoles() {
+		return lstRoles;
+	}
+
+	public void setLstRoles(List<Role> lstRoles) {
+		this.lstRoles = lstRoles;
+	}
+
+	public void addRole(Role role) {
+		if (this.lstRoles == null)
+			this.lstRoles = new ArrayList<Role>();
+
+		this.lstRoles.add(role);
+	}
+
+	public boolean checkPermission(EOperation oper) {
+		boolean result = false;
+		for (Role role : this.lstRoles) {
+
+			switch (oper) {
+			case ADD_MEMBER:
+				result = role.isCanAddMember();
+				break;
+			case UPDATE_MEMBER:
+				result = role.isCanAddMember();
+				break;
+			case REMOVE_MEMBER:
+				result = role.isCanAddMember();
+				break;
+
+			default:
+				break;
+			}
+			if (result)
+				break;
+		}
+		return result;
+	}
 }
